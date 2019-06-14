@@ -1,0 +1,40 @@
+<nb-card (click)="on = !on" [ngClass]="{'off': !on}">
+      <div class="icon-container">
+        <div class="icon nb-phone">
+          <ng-content></ng-content>
+        </div>
+      </div>
+
+      <div class="details">
+        <div class="title">30</div>
+        <div class="status">Agent on calls</div>
+      </div>
+    </nb-card>
+
+
+    <nb-card (click)="on = !on" [ngClass]="{'off': !on}">
+      <div class="icon-container">
+        <div class="icon fa fa-bullhorn">
+          <ng-content></ng-content>
+        </div>
+      </div>
+
+      <div class="details">
+        <div class="title">20</div>
+        <div class="status">Agent waitings</div>
+      </div>
+    </nb-card>
+
+
+    <nb-card (click)="on = !on" [ngClass]="{'off': !on}">
+      <div class="icon-container">
+        <div class="icon ion-flag">
+          <ng-content></ng-content>
+        </div>
+      </div>
+
+      <div class="details">
+        <div class="title">100</div>
+        <div class="status">Agent on paused</div>
+      </div>
+    </nb-card>

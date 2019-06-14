@@ -1,0 +1,10 @@
+a<nb-card>
+  <nb-card-header>
+    Field list
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-field-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
+    </ng2-field-table>
+  </nb-card-body>
+</nb-card>
