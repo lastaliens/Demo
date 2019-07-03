@@ -4,7 +4,7 @@ export class EnvService {
   // be overridden by env.js
 
   // API url
-  public apiUrl = 'http://35.160.184.112:8090/api/v1/';
+  public apiUrl = '';
 
   // Whether or not to enable debug mode
   public enableDebug = true;

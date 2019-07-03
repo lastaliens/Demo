@@ -1,39 +1,38 @@
 import { Injectable } from '@angular/core';
-import { Observable, of as observableOf} from 'rxjs';
+import { Observable} from 'rxjs';
 import { UserService } from '../model/users';
-import { HttpApiUtil } from '../data/http-api-util';
+import { HttpApiUtil } from '../model/http-api-util';
 
 @Injectable()
 export class UsersService extends UserService {
 
-  constructor ( private ipccApi: HttpApiUtil) {
+ endpoint = 'users';
+
+ constructor ( private ipccApi: HttpApiUtil) {
   super(ipccApi);
+ }
 
-}
-deleteUser(id: string): Observable<{}> {
-   // const url = 'http://35.160.184.112:8090/api/v1/users/123';
-   // console.log(url);
-   // return this.http.delete(url, this.httpOptions)
-   // .pipe(
-   //    catchError(this.handleError),
-   //  );
-  return observableOf([true]);
-
-}
-
-// deleteHero (id: number): Observable<{}> {
-//   //const url = `${this.heroesUrl}/${id}`; // DELETE api/heroes/42
-//   return this.http.delete(url, this.httpOptions)
-//     .pipe(
-//       catchError(this.handleError('deleteHero'))
-//     );
-// }
-
-  getUsers(): Observable<any> {
-      return this.ipccApi.get('users');
-
-
+  add(data: any): Observable<any> {
+    return this.ipccApi.put(this.endpoint, data);
   }
+
+  get(): Observable<any> {
+      return this.ipccApi.get(this.endpoint);
+  }
+
+  get_one(id: string): Observable<any> {
+      return this.ipccApi.get_one(this.endpoint, id);
+  }
+
+update(id: string, data: any): Observable<any> {
+    return this.ipccApi.post(this.endpoint, id, data);
+  }
+
+delete(id: string): Observable<any> {
+    return this.ipccApi.delete(this.endpoint, id);
+
+}
+
 
 //   private handleError(error: HttpErrorResponse) {
 //    // console.log("error happend");

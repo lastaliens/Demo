@@ -1,13 +1,11 @@
 <nb-card>
-  <nb-card-header>
-    User list
-<nb-actions size="medium">
-      <nb-action icon="nb-plus" (click)="openWindowForm()"></nb-action>
-     
-    </nb-actions>
-  </nb-card-header>
-
-  <nb-card-body>
+  	<nb-card-header>
+    	Call Queue list
+		<nb-actions size="medium">
+      		<nb-action icon="nb-plus" (click)="openWindowForm()"></nb-action>
+    	</nb-actions>
+	</nb-card-header>
+<nb-card-body>
     <ng2-smart-table 
 	    [settings]="settings" 
 	    [source]="source" 

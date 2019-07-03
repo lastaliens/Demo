@@ -1,0 +1,100 @@
+<div class="row">
+  <div class="col-md-12">
+<form #userForm="ngForm" (ngSubmit)="onSubmit()">
+
+    <nb-card >
+      <nb-card-body>
+        
+<div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="inputEmpCode">Emp code</label>
+    
+              <input id="inputEmpCode" name="emp_code" class="form-control"
+				      required minlength="4"  [(ngModel)]="user.emp_code"
+				      #emp_code="ngModel" placeholder="Emp code required">
+
+			<div *ngIf="emp_code.invalid && (emp_code.dirty || emp_code.touched)"
+			    class="alert alert-danger">
+
+			  <div *ngIf="emp_code.errors.required">
+			    Emp code is required.
+			  </div>
+			  <div *ngIf="emp_code.errors.minlength">
+			    Emp code must be at least 4 characters long.
+			  </div>
+			  
+
+			</div>
+
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="inputRole">Roles</label>
+              <nb-select #role placeholder="Select role" [(selected)]="user.role" filled status="info">
+			      <nb-option value="agent">Agent</nb-option>
+			      <nb-option value="supervisor">Supervisor</nb-option>
+			      <nb-option value="admin">Admin</nb-option>
+			    </nb-select>
+            </div>
+          </div>
+        </div>
+
+          
+           <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="inputFirstName">First Name</label>
+              <input type="text" class="form-control" id="inputFirstName" name="fist_name" [(ngModel)]="user.first_name" placeholder="First Name">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="inputLastName">Last Name</label>
+              <input type="text" class="form-control" id="inputLastName" name="last_name" [(ngModel)]="user.last_name"  placeholder="Last Name">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="inputEmail">Email</label>
+              <input type="email" class="form-control" [(ngModel)]="user.email"
+				      #email="ngModel" id="inputEmail" name="email" required placeholder="Email">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="inputWebsite">Phone number</label>
+              <input type="text" class="form-control" id="inputPhoneNumber" name="phone_number" [(ngModel)]="user.phone_number" placeholder="Phone number">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="inputDob">Dob</label>
+              <input nbInput id="inputDob"
+               placeholder="Date of birth" name="dob" [(ngModel)]="user.dob2"
+               [nbDatepicker]="formpicker">
+        <nb-datepicker #formpicker></nb-datepicker>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="inputAvatar">Avatar</label>
+              <input type="text" class="form-control" id="inputAvatar" name="avatar" [(ngModel)]="user.avatar" placeholder="Avatar">
+            </div>
+          </div>
+        </div>
+
+            <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Submit</button>
+      </nb-card-body>
+    </nb-card>
+</form>
+  </div>
+</div>
+

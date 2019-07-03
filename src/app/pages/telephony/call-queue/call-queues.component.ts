@@ -1,24 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { NbWindowService } from '@nebular/theme';
 import { LocalDataSource } from 'ng2-smart-table';
-import { UserService } from '../../../@core/model/users';
-import { UserFormComponent } from './user-form.component';
+import { CallQueueService } from '../../../@core/model/call-queues';
+import { CallQueueFormComponent } from './call-queue-form.component';
 import { Http, Response } from '@angular/http';
 import 'rxjs/Rx';
 
 @Component({
   selector: 'ngx-smart-table',
-  templateUrl: './users.component.html',
+  templateUrl: './call-queues.component.html',
   styles: [`
     nb-card {
       transform: translate3d(0, 0, 0);
     }
   `],
 })
-export class UsersComponent implements OnInit {
+export class CallQueuesComponent implements OnInit {
 
   settings = {
-    add: {
+     add: {
       addButtonContent: '<i class="nb-plus" (click)="openWindowForm()"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
@@ -35,44 +35,52 @@ export class UsersComponent implements OnInit {
       confirmDelete: true,
     },
     columns: {
-      emp_code: {
-        title: 'Emp code',
+      name: {
+        title: 'Name',
         type: 'string',
       },
-      first_name: {
-        title: 'First Name',
+      strategy: {
+        title: 'Strategy',
         type: 'string',
       },
-      last_name: {
-        title: 'Last Name',
+      moh: {
+        title: 'Moh',
         type: 'string',
       },
-      username: {
-        title: 'Username',
+      agent_wrapup_time: {
+        title: 'Agent_wrapup_time',
         type: 'string',
       },
-      email: {
-        title: 'E-mail',
+      max_queue_size: {
+        title: 'Max_queue_size',
         type: 'string',
       },
-      phone_number: {
-        title: 'Phone number',
+      enter_when_empty: {
+        title: 'Enter_when_empty',
         type: 'string',
       },
-      roles: {
-        title: 'Roles',
-        type: 'Array',
+      connection_timeout: {
+        title: 'Connection_timeout',
+        type: 'string',
       },
+      agent_ring_timeout:{
+        title: 'Agent_ring_timeout',
+        type: 'string',
+      },
+      announce:{
+        title: 'announce',
+        type: 'string',
+      }
     },
   };
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private userService: UserService, private windowService: NbWindowService) {
+  constructor(private callQueueService: CallQueueService, private windowService: NbWindowService) {
   }
 
   ngOnInit() {
-    this.userService.get().subscribe((data) =>  {
+    this.callQueueService.getCallQueues().subscribe((data) =>  {
       this.source.load(data.data);
     });
   }
@@ -82,7 +90,7 @@ export class UsersComponent implements OnInit {
        event.newData['role'] = event.newData['roles'];
        event.newData['roles'] = [event.newData['roles']];
        event.newData['password'] = '12345678';
-      this.userService.add(event.newData).subscribe((data) =>  {
+      this.callQueueService.addCallQueue(event.newData).subscribe((data) =>  {
         event.confirm.resolve(event.newData);
         alert('Added success');
       });
@@ -94,11 +102,11 @@ export class UsersComponent implements OnInit {
  onSaveConfirm(event) {
     if (window.confirm('Are you sure you want to save?')) {
 
-      this.userService.update(event.data.user_id, event.newData).subscribe((data) =>  {
-        alert('update success: ' + data.status);
+      this.callQueueService.updateCallQueue(event.data.user_id, event.newData).subscribe((data) =>  {
+        alert('update successfully: ' + data.status);
         // console.log(data);
         event.confirm.resolve(event.newData);
-        alert('Added success');
+        alert('Added successfully');
       });
     } else {
       event.confirm.reject();
@@ -107,7 +115,7 @@ export class UsersComponent implements OnInit {
 
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete username: ' + event.data.username)) {
-       this.userService.delete(event.data.user_id).subscribe((data) =>  {
+       this.callQueueService.deleteCallQueue(event.data.user_id).subscribe((data) =>  {
         event.confirm.resolve();
     });
     } else {
@@ -116,7 +124,6 @@ export class UsersComponent implements OnInit {
   }
 
   openWindowForm() {
-    this.windowService.open(UserFormComponent, { title: `Add user` });
+    this.windowService.open(CallQueueFormComponent, { title: `Add new call queue` });
   }
-
 }

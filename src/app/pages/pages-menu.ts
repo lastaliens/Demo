@@ -15,8 +15,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/telephony/users',
       },
       {
-        title: 'Fields',
-        link: '/pages/telephony/fields',
+        title: 'Call-Queue',
+        link: '/pages/telephony/call-queue',
       },
        {
         title: 'Devices',

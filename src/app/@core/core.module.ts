@@ -13,10 +13,10 @@ import {
   EnvServiceProvider,
 } from './utils';
 import { SampleUserData } from './data/sample-users';
-import {SampleFieldData} from'./data/sample-fields';
 import { ElectricityData } from './data/electricity';
 import { UserService } from './model/users';
-import { FieldService } from './model/fields';
+import { CallQueueService } from './model/call-queues';
+
 import { UserActivityData } from './data/user-activity';
 import { OrdersChartData } from './data/orders-chart';
 import { ProfitChartData } from './data/profit-chart';
@@ -33,15 +33,14 @@ import { CountryOrderData } from './data/country-order';
 import { StatsProgressBarData } from './data/stats-progress-bar';
 import { VisitorsAnalyticsData } from './data/visitors-analytics';
 import { SecurityCamerasData } from './data/security-cameras';
-import { HttpApiUtil } from './data/http-api-util';
+import { HttpApiUtil } from './model/http-api-util';
 
 import { SampleUserService } from './coreapi/sample-users.service';
-import { SampleFieldService } from './coreapi/sample-fields.service';
 import { IpccApiUtil } from './coreapi/ipcc-api-util.service';
 
 import { ElectricityService } from './mock/electricity.service';
 import { UsersService } from './coreapi/users.service';
-import { FieldsService } from './coreapi/field.service';
+import { CallQueuesService } from './coreapi/call_queues.service';
 import { UserActivityService } from './mock/user-activity.service';
 import { OrdersChartService } from './mock/orders-chart.service';
 import { ProfitChartService } from './mock/profit-chart.service';
@@ -81,9 +80,9 @@ const socialLinks = [
 
 const DATA_SERVICES = [
   { provide: SampleUserData, useClass: SampleUserService },
-    { provide: SampleFieldData, useClass: SampleFieldService },
   { provide: ElectricityData, useClass: ElectricityService },
   { provide: UserService, useClass: UsersService },
+  { provide: CallQueueService, useClass: CallQueuesService },
   { provide: UserActivityData, useClass: UserActivityService },
   { provide: OrdersChartData, useClass: OrdersChartService },
   { provide: ProfitChartData, useClass: ProfitChartService },
@@ -120,7 +119,7 @@ export const NB_CORE_PROVIDERS = [
     strategies: [
       NbPasswordAuthStrategy.setup({
         name: 'email',
-        baseEndpoint: 'http://113.164.246.20:8080/api/v1/',
+        baseEndpoint: 'http://dev.ipcc.tel4vn.com/api/v1/',
         token: {
             //  class: NbAuthJWTToken,
                key: 'auth_token',
